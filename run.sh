@@ -1,0 +1,1 @@
+javac Javaswing.java && java Javaswing
