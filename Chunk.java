@@ -11,8 +11,8 @@ public class Chunk {
         return chunk;
     }
 
-    public void setChunk(int[][] chunk) {
-        this.chunk = chunk;
+    public void setChunk(int chunk) {
+        this.chunk = new int[chunk][chunk];
     }
 
     public int getSize() {
