@@ -6,7 +6,7 @@ class RectanglePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawRect(0, 0, getWidth(), getHeight()); // x, y, width, height
+        g.drawRect(0, 0, getWidth()-1, getHeight()-1); // x, y, width, height
     }
 }
 
@@ -21,25 +21,18 @@ public class Javaswing {
         JFrame frame = new JFrame("HelloWorldSwing");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
-        // Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("what is in the up jaaron liao", JLabel.CENTER);
-        
-        frame.getContentPane().add(label);
-        // RectanglePanel panel = new RectanglePanel();
-        // panel.setBounds(50, 50, 100, 50);
-        // frame.getContentPane().add(panel);
-        for(int r = 0; r < 8; r++) {
-            for(int c = 0; c < 8; c++) {
-                addRect(frame, r * 50, c * 50, 50, 50);
+
+        int wsz = 600;
+        int sz = 25;
+        for(int r = 0; r < wsz/sz; r++) {
+            for(int c = 0; c < wsz/sz; c++) {
+                addRect(frame, r * sz, c * sz, sz, sz);
             }
         }
 
-        // RectanglePanel2 panel2 = new RectanglePanel2();
-        // frame.getContentPane().add(panel2);
-
         // Set the window size and display it.
-        frame.getContentPane().setSize(400, 400);
-        frame.setSize(450, 450);
+        frame.getContentPane().setSize(wsz, wsz);
+        frame.setSize(wsz+50, wsz+50);
         frame.setVisible(true);
     }
     public static void addRect(JFrame frame, int x, int y, int width, int height) {

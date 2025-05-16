@@ -2,7 +2,7 @@
   "name": "Java Swing Dev Container",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "build": {
-    "dockerfile": "../Dockerfile"
+    "dockerfile": "Dockerfile"
   },
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {}
@@ -19,6 +19,6 @@
     }
   },
   "postCreateCommand": "echo 'Dev container is ready!'",
-  "postStartCommand": "git pull",
+  "postStartCommand": "git pull;alias run='./run.sh'",
   "remoteUser": "vscode"
 }

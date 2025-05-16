@@ -18,3 +18,5 @@ EXPOSE 5900 6080
 
 # Start Fluxbox and noVNC
 CMD ["sh", "-c", "fluxbox & websockify --web=/usr/share/novnc/ 6080 localhost:5900"]
+
+RUN alias run="./run.sh"
