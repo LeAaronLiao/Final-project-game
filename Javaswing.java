@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 class RectanglePanel extends JPanel {
     @Override
@@ -10,6 +11,17 @@ class RectanglePanel extends JPanel {
     }
 }
 
+class Listener implements KeyListener {
+    public void keyTyped(KeyEvent e) {
+        // Invoked when a key has been typed.
+    }
+    public void keyPressed(KeyEvent e) {
+        Javaswing.keyPress(e);
+    }
+    public void keyReleased(KeyEvent e) {
+        // Invoked when a key has been released.
+    }
+}
 public class Javaswing {
     /**
      * Create the GUI and show it. For thread safety,
@@ -28,6 +40,7 @@ public class Javaswing {
         frame.getContentPane().setSize(wsz, wsz);
         frame.setSize(wsz+50, wsz+50);
         frame.setVisible(true);
+        frame.addKeyListener(new Listener());
         jframe = frame;
     }
     public static void addRect(JFrame frame, int x, int y, int width, int height) {
@@ -43,26 +56,43 @@ public class Javaswing {
         createAndShowGUI();
         System.out.println(jframe);
         while(true) {
+            jframe.getContentPane().removeAll();
             mainThread(jframe);
-            System.out.println("running loop");
             jframe.revalidate();
             jframe.repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
     public static int x = 0;
+    public static int y = 0;
+    public static int xMove = 0;
+    public static int yMove = 0;
     public static void mainThread(JFrame frame) {
-        /*int sz = 25;
-        for(int r = 0; r < wsz/sz; r++) {
-            for(int c = 0; c < wsz/sz; c++) {
-                addRect(frame, r * sz, c * sz, sz, sz);
-            }
-        }*/
-        addRect(frame, x, 0, 50, 50);
-        x += 1;
+        addRect(frame, x, y, 50, 50);
+        x += 5 * xMove;
+        y += 5 * yMove;
+    }
+    public static void keyPress(KeyEvent e) {
+        String charr = e.getKeyChar() + "";
+        if (charr.equals("w")) {
+            yMove = -1;
+            xMove = 0;
+        } else if(charr.equals("s")) {
+            yMove = 1;
+            xMove = 0;
+        } else if(charr.equals("a")) {
+            xMove = -1;
+            yMove = 0;
+        } else if(charr.equals("d")) {
+            xMove = 1;
+            yMove = 0;
+        } else if(charr.equals(" ")) {
+            xMove = 0;
+            yMove = 0;
+        }
     }
 }
