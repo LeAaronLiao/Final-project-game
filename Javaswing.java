@@ -16,7 +16,7 @@ class Listener implements KeyListener {
         // Invoked when a key has been typed.
     }
     public void keyPressed(KeyEvent e) {
-        Javaswing.keyPress(e);
+        Main.keyPress(e);
     }
     public void keyReleased(KeyEvent e) {
         // Invoked when a key has been released.
@@ -30,7 +30,7 @@ public class Javaswing {
      */
     public static JFrame jframe;
     public static int wsz = 600;
-    private static void createAndShowGUI() {
+    public static void createAndShowGUI() {
         // Create and set up the window.
         JFrame frame = new JFrame("HelloWorldSwing");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,50 +49,5 @@ public class Javaswing {
         frame.getContentPane().add(panel);
     }
 
-    public static void main(String[] args) {
-        // Schedule a job for the event-dispatching thread:
-        // creating and showing this application's GUI.
-        System.out.println("running");
-        createAndShowGUI();
-        System.out.println(jframe);
-        while(true) {
-            jframe.getContentPane().removeAll();
-            mainThread(jframe);
-            jframe.revalidate();
-            jframe.repaint();
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public static int x = 0;
-    public static int y = 0;
-    public static int xMove = 0;
-    public static int yMove = 0;
-    public static void mainThread(JFrame frame) {
-        addRect(frame, x, y, 50, 50);
-        x += 5 * xMove;
-        y += 5 * yMove;
-    }
-    public static void keyPress(KeyEvent e) {
-        String charr = e.getKeyChar() + "";
-        if (charr.equals("w")) {
-            yMove = -1;
-            xMove = 0;
-        } else if(charr.equals("s")) {
-            yMove = 1;
-            xMove = 0;
-        } else if(charr.equals("a")) {
-            xMove = -1;
-            yMove = 0;
-        } else if(charr.equals("d")) {
-            xMove = 1;
-            yMove = 0;
-        } else if(charr.equals(" ")) {
-            xMove = 0;
-            yMove = 0;
-        }
-    }
+    public static void main(String[] args) {}
 }
