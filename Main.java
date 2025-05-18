@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Main {
+    public static Player player = new Player("jaaron jiao", 0, 0, 0, 0, 0, 0, 0, null, null, 0, 0);
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -21,14 +22,12 @@ public class Main {
             }
         }
     }
-    public static int x = 0;
-    public static int y = 0;
     public static int xMove = 0;
     public static int yMove = 0;
     public static void mainThread(JFrame frame) {
-        Javaswing.addRect(frame, x, y, 50, 50);
-        x += 5 * xMove;
-        y += 5 * yMove;
+        player.draw();
+        player.moveX(5 * xMove);
+        player.moveY(5 * yMove);
     }
     public static void keyPress(KeyEvent e) {
         String charr = e.getKeyChar() + "";

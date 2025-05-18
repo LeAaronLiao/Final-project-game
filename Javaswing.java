@@ -3,6 +3,31 @@ import java.awt.*;
 import java.awt.event.*;
 
 class RectanglePanel extends JPanel {
+    private int x = 0;
+    private int y = 0;
+    public RectanglePanel(int x, int y, int width, int height) {
+        super();
+        setBounds(x, y, width, height);
+    }
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    // getWidth and getHeight are inherited from JPanel, they aren't needed
+    public void setWidth(int width) {
+        setBounds(x, y, width, getHeight());
+    }
+    public void setHeight(int height) {
+        setBounds(x, y, getWidth(), height);
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,11 +67,6 @@ public class Javaswing {
         frame.setVisible(true);
         frame.addKeyListener(new Listener());
         jframe = frame;
-    }
-    public static void addRect(JFrame frame, int x, int y, int width, int height) {
-        RectanglePanel panel = new RectanglePanel();
-        panel.setBounds(x, y, width, height);
-        frame.getContentPane().add(panel);
     }
 
     public static void main(String[] args) {}
