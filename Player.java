@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Player {
     private String name;
     private int score;
@@ -8,12 +9,12 @@ public class Player {
     private int attackPower;
     private int defensePower;
     private String item;
-    private String[] inventory;
-    private int inventorySize;
+    private ArrayList<Item> inventory;
     private int Energy;
     private RectanglePanel rect;
 
-    public Player(String playerName, int playerScore, int playerLevel, int playerHealth, int playerPositionX, int playerPositionY, int attackPower, int defensePower, String item, String[] inventory, int inventorySize, int Energy) {
+
+    public Player(String playerName, int playerScore, int playerLevel, int playerHealth, int playerPositionX, int playerPositionY, int attackPower, int defensePower, String item, ArrayList<Item> inventory) {
         this.name = playerName;
         this.score = playerScore;
         this.level = playerLevel;
@@ -24,8 +25,6 @@ public class Player {
         this.defensePower = defensePower;
         this.item = item;
         this.inventory = inventory;
-        this.inventorySize = inventorySize;
-        this.Energy = Energy;
         this.rect = new RectanglePanel(x, y, 50, 50);
     }
     public String getName() {
