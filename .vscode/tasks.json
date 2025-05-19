@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run program",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "/workspaces/Final-project-game/run.sh"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
