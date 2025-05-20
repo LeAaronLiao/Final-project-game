@@ -6,8 +6,8 @@ public class Player extends Entity {
     private int Energy;
     private RectanglePanel rect;
 
-    public Player(String name, int Health, int Level, int PositionX, int PositionY, int attackPower, int defensePower, int someInt, String item, ArrayList<Item> inventory) {
-        super(name, Health,Level, PositionX, PositionY);
+    public Player(String name, int Health, int Level, int PositionX, int PositionY, int attackPower, int defensePower, String item, String[] inventory, int inventorySize, int Energy) {
+       super(name, Health,Level, PositionX, PositionY);
         this.attackPower = attackPower;
         this.defensePower = defensePower;
         this.item = item;
