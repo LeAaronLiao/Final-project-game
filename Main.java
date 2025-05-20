@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Main {
-    public static Player player = new Player("plaer",0,0,0,0,0,0,0,"",new ArrayList<Item>());
+    // public static Player player = new Player("plaer",0,0,0,0,0,0,0,"",new ArrayList<Item>());
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -26,9 +26,10 @@ public class Main {
     public static int xMove = 0;
     public static int yMove = 0;
     public static void mainThread(JFrame frame) {
-        player.draw();
-        player.moveX(5 * xMove);
-        player.moveY(5 * yMove);
+        Javaswing.jframe.add(new RectanglePanel(30, 20, 50, 50));
+        // player.draw();
+        // player.moveX(5 * xMove);
+        // player.moveY(5 * yMove);
     }
     public static void keyPress(KeyEvent e) {
         String charr = e.getKeyChar() + "";
