@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Main {
-    public static Player player = new Player("jaaron jiao", 0, 0, 0, 0, 0, 0, 0, null, null, 0, 0);
+    public static Player player = new Player("plaer",0,0,0,0,0,0,0,"",new ArrayList<Item>());
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -44,8 +45,8 @@ public class Main {
             xMove = 1;
             yMove = 0;
         } else if(charr.equals(" ")) {
-            xMove = 0;
-            yMove = 0;
+            xMove = 0;       
+            yMove = 0;         
         }
     }
 }
