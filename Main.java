@@ -16,6 +16,7 @@ public class Main {
             mainThread(Javaswing.jframe);
             Javaswing.jframe.revalidate();
             Javaswing.jframe.repaint();
+            System.out.println(Javaswing.jframe);
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -27,7 +28,11 @@ public class Main {
     public static int yMove = 0;
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static void mainThread(JFrame frame) {
-        for(Enemy e : enemies) { 
+        QuestionPanel questionPanel = new QuestionPanel();
+        Javaswing.jframe.add(new JLabel("gggrt"));
+        System.out.println("main loop");
+        Javaswing.jframe.add(questionPanel);
+        /*for(Enemy e : enemies) {
             if(player.colliding(e)) {
                 e.getRect().setColor(new Color(255, 0, 0));
                 xMove = 0;
@@ -39,7 +44,7 @@ public class Main {
         }
         player.draw();
         player.move(5 * xMove, 0);
-        player.move(0, 5 * yMove);
+        player.move(0, 5 * yMove);*/
     }
     public static void keyPress(KeyEvent e) {
         String charr = e.getKeyChar() + "";
