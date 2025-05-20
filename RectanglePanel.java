@@ -5,10 +5,12 @@ import java.awt.event.*;
 public class RectanglePanel extends JPanel {
     private int x = 0;
     private int y = 0;
-    public RectanglePanel(int x, int y, int width, int height) {
+    private Color color;
+    public RectanglePanel(int x, int y, int width, int height, Color color) {
         super();
         this.x = x;
         this.y = y;
+        this.color = color;
         setBounds(x, y, width, height);
     }
     public int getX() {
@@ -30,10 +32,16 @@ public class RectanglePanel extends JPanel {
     public void setHeight(int height) {
         setBounds(x, y, getWidth(), height);
     }
+    public Color getColor() {
+        return color;
+    }
+    public void setColor(Color color) {
+        this.color = color;
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.BLACK);
+        g.setColor(this.color);
         g.drawRect(0, 0, getWidth()-1, getHeight()-1); // x, y, width, height
     }
 }

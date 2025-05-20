@@ -1,15 +1,19 @@
+import java.awt.*;
 public class Entity{
-  public String name;
-    public int Health;
-    public int Level;
-    public int PositionX;
-    public int PositionY;
+    private String name;
+    private int Health;
+    private int Level;
+    private int PositionX;
+    private int PositionY;
+    private RectanglePanel rect;
+
 public Entity(String name, int Health, int Level, int PositionX, int PositionY){
     this.name = name;
     this.Health = Health;
     this.Level = Level;
     this.PositionX = PositionX;
     this.PositionY = PositionY;
+    this.rect = new RectanglePanel(getX(), getY(), 50, 50, new Color(0,0,0));
 }
 
 public String getName() {
@@ -23,11 +27,11 @@ public int getLevel() {
     return Level;
 }
 
-public int getPositionX() {
+public int getX() {
     return PositionX;
 }
 
-public int getPositionY() {
+public int getY() {
     return PositionY;
 }
 public void setName(String name) {
@@ -39,10 +43,10 @@ public void setHealth(int Health) {
 public void setLevel(int Level) {
     this.Level = Level;
 }
-public void setPositionX(int PositionX) {
+public void setX(int PositionX) {
     this.PositionX = PositionX;
 }
-public void setPositionY(int PositionY) {
+public void setY(int PositionY) {
     this.PositionY = PositionY;
 }
 public void move(int x, int y) {
@@ -54,8 +58,15 @@ public void attack(Entity target) {
     target.setHealth(target.getHealth() - 10);
     System.out.println(target.getName() + " has " + target.getHealth() + " health left.");
 }
-
-
-
-
+    public RectanglePanel getRect() {
+        return this.rect;
+    }
+    public void draw() {
+        this.rect.setX(PositionX);
+        this.rect.setY(PositionY);
+        Javaswing.jframe.add(this.rect);
+    }
+    public boolean colliding(Entity e) {
+        return (Math.abs(this.getX() - e.getX()) < 50) && (Math.abs(this.getY() - e.getY()) < 50);
+    }
 }
