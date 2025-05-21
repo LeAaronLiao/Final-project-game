@@ -10,7 +10,7 @@ class Listener implements KeyListener {
         Main.keyPress(e);
     }
     public void keyReleased(KeyEvent e) {
-        // Invoked when a key has been released.
+        Main.keyReleased(e);
     }
 }
 public class Javaswing {

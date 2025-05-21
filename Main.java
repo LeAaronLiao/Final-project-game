@@ -8,43 +8,34 @@ public class Main {
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Javaswing.jframe.getContentPane().removeAll();
+                mainThread(Javaswing.jframe);
+                Javaswing.jframe.revalidate();
+                Javaswing.jframe.repaint();
+                System.out.println(Javaswing.jframe);
+            }
+        };
         System.out.println("running");
         Javaswing.createAndShowGUI();
-        System.out.println(Javaswing.jframe);
-        while(true) {
-            Javaswing.jframe.getContentPane().removeAll();
-            mainThread(Javaswing.jframe);
-            Javaswing.jframe.revalidate();
-            Javaswing.jframe.repaint();
-            System.out.println(Javaswing.jframe);
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        Timer timer = new Timer(50, listener);
+        timer.setRepeats(true);
+        timer.start();
     }
     public static int xMove = 0;
     public static int yMove = 0;
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    public static QuestionPanel questionPanel = new QuestionPanel("whats 2+2", (new String[]{"3", "4", "2", "5"}), "5");
+    public static boolean playing = true;
     public static void mainThread(JFrame frame) {
-        QuestionPanel questionPanel = new QuestionPanel();
-        Javaswing.jframe.add(new JLabel("gggrt"));
-        System.out.println("main loop");
-        Javaswing.jframe.add(questionPanel);
-        /*for(Enemy e : enemies) {
-            if(player.colliding(e)) {
-                e.getRect().setColor(new Color(255, 0, 0));
-                xMove = 0;
-                yMove = 0;
-            } else {
-                e.getRect().setColor(new Color(0,0,0));
-            }
-            e.draw();
+        /*Javaswing.jframe.getContentPane().setLayout(new BorderLayout());
+        Javaswing.jframe.getContentPane().add(questionPanel);*/
+        if(playing) {
+            player.draw();
+            player.move(10*xMove, 10*yMove);
         }
-        player.draw();
-        player.move(5 * xMove, 0);
-        player.move(0, 5 * yMove);*/
     }
     public static void keyPress(KeyEvent e) {
         String charr = e.getKeyChar() + "";
@@ -62,11 +53,18 @@ public class Main {
             yMove = 0;
         } else if(charr.equals(" ")) {
             xMove = 0;       
-            yMove = 0;         
+            yMove = 0;
         } else if(charr.equals("e")) {
             int randX = (int)(Math.random() * 350);
             int randY = (int)(Math.random() * 350);
             enemies.add(new Enemy("new enemy", 0, 0, randX, randY));
+        } else if(charr.equals("q")) {
+            questionPanel.newQuestion("whats 2 + 2", new String[]{"4","5","3","2"}, "5");
         }
+    }
+    public static void keyReleased(KeyEvent e) {
+        String charr = e.getKeyChar() + "";
+        xMove = 0;
+        yMove = 0;
     }
 }

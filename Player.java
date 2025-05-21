@@ -3,7 +3,6 @@ public class Player extends Entity {
     private int attackPower;
     private int defensePower;
     private String item;
-    private int Energy;
     private int score;
     private int level;
 
@@ -12,7 +11,6 @@ public class Player extends Entity {
         this.attackPower = attackPower;
         this.defensePower = defensePower;
         this.item = item;
-        this.Energy = Energy;
         this.score = 0;
         this.level = 1;
     }
@@ -21,8 +19,5 @@ public class Player extends Entity {
     }
     public void setScore(int playerScore) {
         this.score = playerScore;
-    }
-    public void answerQuestion(){
-        
     }
 }
