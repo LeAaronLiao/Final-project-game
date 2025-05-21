@@ -30,11 +30,12 @@ public class Main {
     public static QuestionPanel questionPanel = new QuestionPanel("whats 2+2", (new String[]{"3", "4", "2", "5"}), "5");
     public static boolean playing = true;
     public static void mainThread(JFrame frame) {
-        /*Javaswing.jframe.getContentPane().setLayout(new BorderLayout());
-        Javaswing.jframe.getContentPane().add(questionPanel);*/
         if(playing) {
             player.draw();
             player.move(10*xMove, 10*yMove);
+        } else {
+            Javaswing.jframe.getContentPane().setLayout(new BorderLayout());
+            Javaswing.jframe.getContentPane().add(questionPanel);
         }
     }
     public static void keyPress(KeyEvent e) {
