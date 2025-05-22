@@ -7,19 +7,24 @@ public class Questions {
         answers = ans;
         correctAns = cor;
    }
-   public String getQuestion(){
-    return question;
-   }
-   public String getAnswers(){
-    String result = "";
-    for(String i:answers){
-        result+=(i + "   ");
+    public String getQuestion() {
+        return question;
     }
-    return result;
-   }
-   public String getCorrect(){
-    return correctAns;
-   }
+    public String[] getAnswers() {
+        return answers;
+    }
+    public String getCorrectAns() {
+        return correctAns;
+    }
+    public void setQuestion(String q) {
+        question = q;
+    }
+    public void setAnswers(String[] ans) {
+        answers = ans;
+    }
+    public void setCorrectAns(String cor) {
+        correctAns = cor;
+    }
 }
  
 

@@ -15,10 +15,8 @@ public class Main {
                 mainThread(Javaswing.jframe);
                 Javaswing.jframe.revalidate();
                 Javaswing.jframe.repaint();
-                System.out.println(Javaswing.jframe);
             }
         };
-        System.out.println("running");
         Javaswing.createAndShowGUI();
         Timer timer = new Timer(50, listener);
         timer.setRepeats(true);
@@ -31,11 +29,16 @@ public class Main {
     public static boolean playing = true;
     public static void mainThread(JFrame frame) {
         if(playing) {
+            frame.getContentPane().setLayout(null);
+            frame.getContentPane().add(new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED));
+            for(Enemy x : enemies) {
+                x.draw();
+            }
             player.draw();
             player.move(10*xMove, 10*yMove);
         } else {
-            Javaswing.jframe.getContentPane().setLayout(new BorderLayout());
-            Javaswing.jframe.getContentPane().add(questionPanel);
+            frame.getContentPane().setLayout(new BorderLayout());
+            frame.getContentPane().add(questionPanel);
         }
     }
     public static void keyPress(KeyEvent e) {
@@ -60,12 +63,14 @@ public class Main {
             int randY = (int)(Math.random() * 350);
             enemies.add(new Enemy("new enemy", 0, 0, randX, randY));
         } else if(charr.equals("q")) {
-            questionPanel.newQuestion("whats 2 + 2", new String[]{"4","5","3","2"}, "5");
+            if(!playing) {
+                playing = true;
+            } else {
+                playing = false;
+                questionPanel.newQuestion("whats 2 + 2", new String[]{"4","5","3","2"}, "5");
+            }
         }
     }
     public static void keyReleased(KeyEvent e) {
-        String charr = e.getKeyChar() + "";
-        xMove = 0;
-        yMove = 0;
     }
 }

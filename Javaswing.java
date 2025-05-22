@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class Listener implements KeyListener {
+class KeyboardEvents implements KeyListener {
     public void keyTyped(KeyEvent e) {
         // Invoked when a key has been typed.
     }
@@ -31,8 +31,13 @@ public class Javaswing {
         frame.getContentPane().setSize(wsz, wsz);
         frame.setSize(wsz+50, wsz+50);
         frame.setVisible(true);
-        frame.addKeyListener(new Listener());
+        frame.addKeyListener(new KeyboardEvents());
         jframe = frame;
+    }
+    public static Point getMousePos() {
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(mouse, jframe.getContentPane());
+        return mouse;
     }
 
     public static void main(String[] args) {}

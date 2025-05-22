@@ -42,6 +42,8 @@ public class QuestionPanel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkAnswer(x);
+                        System.out.println(Javaswing.jframe.getKeyListeners().length);
+                        Javaswing.jframe.requestFocusInWindow();
                     }
                 });
             }
@@ -73,8 +75,8 @@ public class QuestionPanel extends JPanel {
                     newQuestion(q+"newq", new String[]{q,"og","o1","p1"}, q);
                 }
             });
-            timer.start();
             timer.setRepeats(false);
+            timer.start();
         } else {
             x.setBackground(Color.RED);
             x.add(new JLabel("Wrong! Try again!"));

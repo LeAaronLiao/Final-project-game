@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TestQuestions {
-    private ArrayList<Questions> quizQuestions;
+    private static ArrayList<Questions> quizQuestions;
 
     public TestQuestions() {
         quizQuestions = new ArrayList<Questions>();
@@ -17,7 +17,7 @@ public class TestQuestions {
         quizQuestions.add(new Questions("What is the largest planet in our solar system?", new String[]{"Mars", "Jupiter", "Saturn", "Earth"}, "Jupiter"));
         quizQuestions.add(new Questions("What gas do plants primarily absorb from the atmosphere?", new String[]{"Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"}, "Carbon Dioxide"));
         quizQuestions.add(new Questions("How many continents are there?", new String[]{"5", "6", "7", "8"}, "7"));
-        quizQuestions.add(new Questions("What is the chemical symbol for water?", new String[]{"O2", "H2O", "CO2", "NACL"}, "H2O"));
+        quizQuestions.add(new Questions("What is the chemical formula for water?", new String[]{"O2", "H2O", "CO2", "NACL"}, "H2O"));
 
         // history
         quizQuestions.add(new Questions("In what year did World War II end?", new String[]{"1939", "1945", "1950", "1918"}, "1945"));
@@ -33,18 +33,17 @@ public class TestQuestions {
         quizQuestions.add(new Questions("What country is known as the 'Land of the Rising Sun'?", new String[]{"China", "South Korea", "Japan", "Thailand"}, "Japan"));
         quizQuestions.add(new Questions("Which desert is the largest hot desert in the world?", new String[]{"Sahara Desert", "Gobi Desert", "Arabian Desert", "Kalahari Desert"}, "Sahara Desert"));
 
-        // misc
-        quizQuestions.add(new Questions("Who sings the song 'Bohemian Rhapsody'?", new String[]{"The Beatles", "Led Zeppelin", "Queen", "Pink Floyd"}, "Queen"));
+        // pop culture
+        quizQuestions.add(new Questions("Who sings the song 'Break Stuff'?", new String[]{"The Beatles", "Led Zeppelin", "Limp Bizkit", "Pink Floyd"}, "Queen"));
         quizQuestions.add(new Questions("What is the name of the main character in the 'Super Mario' video game series?", new String[]{"Luigi", "Wario", "Bowser", "Mario"}, "Mario"));
         quizQuestions.add(new Questions("Which movie features a character named 'Buzz Lightyear'?", new String[]{"Cars", "Finding Nemo", "Toy Story", "Monsters, Inc."}, "Toy Story"));
         quizQuestions.add(new Questions("What is the name of the friendly ghost in the popular cartoons?", new String[]{"Slimer", "Casper", "Ghosty", "Spooky"}, "Casper"));
-        quizQuestions.add(new Questions("Which band had hits like 'Smells Like Teen Spirit' and 'Come As You Are'?", new String[]{"Pearl Jam", "Soundgarden", "Nirvana", "Alice in Chains"}, "Nirvana"));
+        quizQuestions.add(new Questions("Which band had hits like 'B.Y.O.B' and 'Toxicity'?", new String[]{"Pearl Jam", "System of a Down", "Nirvana", "Alice in Chains"}, "System of a Down"));
     }
 
-    public String giveQuestions() {
+    public static Questions giveQuestions() {
         int random = (int)(Math.random() * quizQuestions.size());
         Questions rand = quizQuestions.get(random);
-        // Assuming getQuestions() returns the question text and getAnswers() returns the options as a String
-        return rand.getQuestion() + " " + String.join(", ", rand.getAnswers());
+        return rand;
     }
 }
