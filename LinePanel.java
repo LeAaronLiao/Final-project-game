@@ -58,6 +58,9 @@ public class LinePanel extends JPanel {
     public void setColor(Color color) {
         this.color = color;
     }
+    public double getSlope() {
+        return (double)(y2 - y1) / (x2 - x1);
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class RectanglePanel extends JPanel {
     private int x = 0;

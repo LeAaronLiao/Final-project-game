@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 public class Player extends Entity {
     private int attackPower;
@@ -19,5 +20,29 @@ public class Player extends Entity {
     }
     public void setScore(int playerScore) {
         this.score = playerScore;
+    }
+    public int getAttackPower() {
+        return attackPower;
+    }
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+    public int getDefensePower() {
+        return defensePower;
+    }
+    public void setDefensePower(int defensePower) {
+        this.defensePower = defensePower;
+    }
+    public String getItem() {
+        return item;
+    }
+    public void setItem(String item) {
+        this.item = item;
+    }
+    public int getLevel() {
+        return level;
+    }
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

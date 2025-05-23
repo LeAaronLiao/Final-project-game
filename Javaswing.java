@@ -10,9 +10,23 @@ class KeyboardEvents implements KeyListener {
         Main.keyPress(e);
     }
     public void keyReleased(KeyEvent e) {
-        Main.keyReleased(e);
+        // Main.keyReleased(e);
     }
 }
+class MouseEvents implements MouseListener {
+    public void mouseClicked(MouseEvent e) {
+        Main.mouseClick(e);
+    }
+    public void mousePressed(MouseEvent e) {
+        // Main.mousePress(e);
+    }
+    public void mouseReleased(MouseEvent e) {
+        // Main.mouseRelease(e);
+    }
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+}
+
 public class Javaswing {
     /**
      * Create the GUI and show it. For thread safety,
@@ -32,6 +46,7 @@ public class Javaswing {
         frame.setSize(wsz+50, wsz+50);
         frame.setVisible(true);
         frame.addKeyListener(new KeyboardEvents());
+        frame.addMouseListener(new MouseEvents());
         jframe = frame;
     }
     public static Point getMousePos() {

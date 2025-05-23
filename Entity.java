@@ -45,13 +45,37 @@ public class Entity {
     }
     public void setX(int PositionX) {
         this.PositionX = PositionX;
+        if(this.PositionX < 0) {
+            this.PositionX = 0;
+        }
+        if(this.PositionX > Javaswing.jframe.getWidth() - 50) {
+            this.PositionX = Javaswing.jframe.getWidth() - 50;
+        }
     }
     public void setY(int PositionY) {
         this.PositionY = PositionY;
+        if(this.PositionY < 0) {
+            this.PositionY = 0;
+        }
+        if(this.PositionY > Javaswing.jframe.getHeight() - 50) {
+            this.PositionY = Javaswing.jframe.getHeight() - 50;
+        }
     }
     public void move(int x, int y) {
         this.PositionX += x;
         this.PositionY += y;
+        if(this.PositionX < 0) {
+            this.PositionX = 0;
+        }
+        if(this.PositionX > Javaswing.jframe.getWidth() - 50) {
+            this.PositionX = Javaswing.jframe.getWidth() - 50;
+        }
+        if(this.PositionY < 0) {
+            this.PositionY = 0;
+        }
+        if(this.PositionY > Javaswing.jframe.getHeight() - 50) {
+            this.PositionY = Javaswing.jframe.getHeight() - 50;
+        }
     }
     public void attack(Entity target) {
         System.out.println(this.name + " attacks " + target.getName());
