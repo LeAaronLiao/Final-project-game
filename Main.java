@@ -39,6 +39,7 @@ public class Main {
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
+            frame.add(new JLabel());
             line = new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED);
             frame.getContentPane().add(line);
             for(int i = 0; i < enemies.size(); i++) {
@@ -46,7 +47,7 @@ public class Main {
                 x.getRect().setColor(null);
                 if(bullet.colliding(x)) {
                     x.getRect().setColor(Color.BLUE);
-                    // shot = false;
+                    x.setHealth(x.getHealth()-2);
                     enemies.remove(i);
                 }
                 x.draw();

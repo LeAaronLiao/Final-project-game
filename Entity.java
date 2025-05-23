@@ -6,6 +6,7 @@ public class Entity {
     private int PositionX;
     private int PositionY;
     private RectanglePanel rect;
+    protected String imagePath;
 
     public Entity(String name, int Health, int Level, int PositionX, int PositionY){
         this.name = name;
@@ -88,6 +89,7 @@ public class Entity {
     public void draw() {
         this.rect.setX(PositionX);
         this.rect.setY(PositionY);
+        Javaswing.jframe.add(new ImagePanel(PositionX, PositionY, 50, 50, imagePath));
         Javaswing.jframe.add(this.rect);
     }
     public boolean colliding(Entity e) {

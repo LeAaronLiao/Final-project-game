@@ -14,6 +14,7 @@ public class Player extends Entity {
         this.item = item;
         this.score = 0;
         this.level = 1;
+        imagePath = "shivank.jpg";
     }
     public int getScore() {
         return score;
@@ -24,6 +25,9 @@ public class Player extends Entity {
     public int getAttackPower() {
         return attackPower;
     }
+    public void increaseAttackPower(){
+        attackPower++;
+    }
     public void setAttackPower(int attackPower) {
         this.attackPower = attackPower;
     }
@@ -32,6 +36,9 @@ public class Player extends Entity {
     }
     public void setDefensePower(int defensePower) {
         this.defensePower = defensePower;
+    }
+    public void increaseDefensePower(){
+        defensePower++;
     }
     public String getItem() {
         return item;

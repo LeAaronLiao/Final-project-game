@@ -10,6 +10,7 @@ public class QuestionPanel extends JPanel {
     private JButton[] buttons;
     private JPanel buttonGrid;
     private JPanel mainPanel;
+    public static int rightInARow = 0;
 
     public QuestionPanel(String q, String[] answers, String correct) {
         this.correctAnswer = correct;
@@ -65,11 +66,8 @@ public class QuestionPanel extends JPanel {
         }
     }
     public void checkAnswer(JButton x) {
-        int rightInARow3 = 0;
-        int rightInARow5 = 0;
         if(x.getText().equals(correctAnswer)) {
-            rightInARow3++;
-            rightInARow5++;
+            rightInARow++;
             x.setBackground(Color.GREEN);
             isCorrect = true;
             Timer timer = new Timer(1000, new ActionListener() {
@@ -85,6 +83,11 @@ public class QuestionPanel extends JPanel {
             x.setBackground(Color.RED);
             x.add(new JLabel("Wrong! Try again!"));
         }
-
+        if(rightInARow % 3 == 0){
+            Main.player.increaseAttackPower();
+        }
+        if(rightInARow % 5 == 0){
+            Main.player.increaseDefensePower();
+        }
     }
 }
