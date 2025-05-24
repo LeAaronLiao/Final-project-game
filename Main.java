@@ -1,4 +1,4 @@
- import javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class Main {
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
-            frame.add(new JLabel());
+            frame.getContentPane().add(new JLabel());
             line = new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED);
             frame.getContentPane().add(line);
             for(int i = 0; i < enemies.size(); i++) {
@@ -57,7 +57,6 @@ public class Main {
             if(!shot) {
                 bullet.setX(line.getP2().x-bullet.getRadius());
                 bullet.setY(line.getP2().y-bullet.getRadius());
-                frame.add(bullet);
             } else {
                 bullet.setX(
                     new LinePanel(bulletStart.x, bulletStart.y, bulletEnd.x, bulletEnd.y, bulletLength, null).getP2().x-bullet.getRadius()
@@ -66,13 +65,13 @@ public class Main {
                     new LinePanel(bulletStart.x, bulletStart.y, bulletEnd.x, bulletEnd.y, bulletLength, null).getP2().y-bullet.getRadius()
                 );
                 bulletLength+=10;
-                frame.add(bullet);
                 bulletFrames++;
                 if(bulletFrames > 25) {
                     shot = false;
                     bulletFrames = 0;
                 }
             }
+            frame.getContentPane().add(bullet);
             enemySpawn++;
             if(enemySpawn >= 40 && enemies.size() < 10) {
                 enemySpawn = 0;

@@ -1,27 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
-public class ImagePanel extends JPanel {
+public class ImagePanel {
     private String imagePath;
-    private Image image;
+    private JLabel image;
     private int x;
     private int y;
+    private int width;
+    private int height;
 
     public ImagePanel(int x, int y, int width, int height, String path) {
         super();
         this.x = x;
         this.y = y;
         this.imagePath = path;
-        try {
-            this.image = ImageIO.read(new File(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setBounds(x, y, width, height);
+        image = new JLabel();
+        ImageIcon imgThisImg = new ImageIcon(path);
+        Image scaled = imgThisImg.getImage().getScaledInstance(50, 50, Image.SCALE_FAST);
+        image.setIcon(new ImageIcon(scaled));
+        image.setBounds(x, y, width, height);
     }
+    
     public int getX() {
         return x;
     }
@@ -34,16 +33,37 @@ public class ImagePanel extends JPanel {
     public void setY(int y) {
         this.y = y;
     }
-    // getWidth and getHeight are inherited from JPanel, they aren't needed
     public void setWidth(int width) {
-        setBounds(x, y, width, getHeight());
+        this.width = width;
     }
     public void setHeight(int height) {
-        setBounds(x, y, getWidth(), height);
+        this.height = height;
     }
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(this.image, 0, 0, getWidth()-1, getHeight()-1, this); // x, y, width, height
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+    public JLabel getImage() {
+        return image;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public void draw() {
+        this.image.setBounds(x, y, width, height);
+        Javaswing.jframe.add(this.image);
+    }
+    public void draw(int x, int y, int width, int height) {
+        setX(x);
+        setY(y);
+        setWidth(width);
+        setHeight(height);
+        this.image.setBounds(x, y, width, height);
+        Javaswing.jframe.add(this.image);
     }
 }

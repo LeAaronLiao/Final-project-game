@@ -7,14 +7,17 @@ public class Entity {
     private int PositionY;
     private RectanglePanel rect;
     protected String imagePath;
+    private ImagePanel image;
 
-    public Entity(String name, int Health, int Level, int PositionX, int PositionY){
+    public Entity(String name, int Health, int Level, int PositionX, int PositionY, String imagePath) {
         this.name = name;
         this.Health = Health;
         this.Level = Level;
         this.PositionX = PositionX;
         this.PositionY = PositionY;
         this.rect = new RectanglePanel(getX(), getY(), 50, 50, new Color(0,0,0));
+        this.imagePath = imagePath;
+        this.image = new ImagePanel(PositionX, PositionY, 50, 50, imagePath);
     }
 
     public String getName() {
@@ -89,8 +92,8 @@ public class Entity {
     public void draw() {
         this.rect.setX(PositionX);
         this.rect.setY(PositionY);
-        Javaswing.jframe.add(new ImagePanel(PositionX, PositionY, 50, 50, imagePath));
-        Javaswing.jframe.add(this.rect);
+        this.image.draw(PositionX, PositionY, 50, 50);
+        Javaswing.jframe.getContentPane().add(this.rect);
     }
     public boolean colliding(Entity e) {
         return (Math.abs(this.getX() - e.getX()) < 50) && (Math.abs(this.getY() - e.getY()) < 50);

@@ -8,13 +8,12 @@ public class Player extends Entity {
     private int level;
 
     public Player(String name, int Health, int Level, int PositionX, int PositionY, int attackPower, int defensePower, String item, ArrayList<Item> items) {
-       super(name, Health,Level, PositionX, PositionY);
+        super(name, Health,Level, PositionX, PositionY, "shivank.jpg");
         this.attackPower = attackPower;
         this.defensePower = defensePower;
         this.item = item;
         this.score = 0;
         this.level = 1;
-        imagePath = "shivank.jpg";
     }
     public int getScore() {
         return score;
