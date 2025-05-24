@@ -54,6 +54,4 @@ public class Javaswing {
         SwingUtilities.convertPointFromScreen(mouse, jframe.getContentPane());
         return mouse;
     }
-
-    public static void main(String[] args) {}
 }

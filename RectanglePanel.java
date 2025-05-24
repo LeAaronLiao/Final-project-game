@@ -4,6 +4,7 @@ import java.awt.*;
 public class RectanglePanel extends JPanel {
     private int x = 0;
     private int y = 0;
+    private boolean filled = false;
     private Color color;
     public RectanglePanel(int x, int y, int width, int height, Color color) {
         super();
@@ -11,6 +12,16 @@ public class RectanglePanel extends JPanel {
         this.y = y;
         this.color = color;
         setBounds(x, y, width, height);
+        setOpaque(false);
+    }
+    public RectanglePanel(int x, int y, int width, int height, Color color, boolean filled) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.filled = filled;
+        setBounds(x, y, width, height);
+        setOpaque(false);
     }
     public int getX() {
         return x;
@@ -41,6 +52,10 @@ public class RectanglePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(this.color);
-        g.drawRect(0, 0, getWidth()-1, getHeight()-1); // x, y, width, height
+        if(filled) {
+            g.fillRect(0, 0, getWidth(), getHeight()); // x, y, width, height
+        } else {
+            g.drawRect(0, 0, getWidth()-1, getHeight()-1); // x, y, width, height
+        }
     }
 }

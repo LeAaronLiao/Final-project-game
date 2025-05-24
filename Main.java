@@ -39,16 +39,30 @@ public class Main {
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
-            frame.getContentPane().add(new JLabel());
+
+            JLabel atkpl = new JLabel("attack power: " + player.getAttackPower());
+            atkpl.setBounds(0, 0, 200, 20);
+            frame.getContentPane().add(atkpl);
+            frame.getContentPane().setComponentZOrder(atkpl, frame.getContentPane().getComponentCount() - 1);
+
+            JLabel defpl = new JLabel("defense power: " + player.getDefensePower());
+            defpl.setBounds(0, 25, 200, 20);
+            frame.getContentPane().add(defpl);
+            frame.getContentPane().setComponentZOrder(defpl, frame.getContentPane().getComponentCount() - 1);
+
             line = new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED);
             frame.getContentPane().add(line);
             for(int i = 0; i < enemies.size(); i++) {
                 Enemy x = enemies.get(i);
                 x.getRect().setColor(null);
+                x.move
                 if(bullet.colliding(x)) {
                     x.getRect().setColor(Color.BLUE);
-                    x.setHealth(x.getHealth()-2);
-                    enemies.remove(i);
+                    x.setHealth(x.getHealth()-10);
+                    if(x.getHealth() <= 0) {
+                        enemies.remove(i);
+                    }
+                    shot = false;
                 }
                 x.draw();
             }
@@ -64,6 +78,7 @@ public class Main {
                 bullet.setY(
                     new LinePanel(bulletStart.x, bulletStart.y, bulletEnd.x, bulletEnd.y, bulletLength, null).getP2().y-bullet.getRadius()
                 );
+                frame.getContentPane().add(bullet);
                 bulletLength+=10;
                 bulletFrames++;
                 if(bulletFrames > 25) {
@@ -71,13 +86,12 @@ public class Main {
                     bulletFrames = 0;
                 }
             }
-            frame.getContentPane().add(bullet);
             enemySpawn++;
             if(enemySpawn >= 40 && enemies.size() < 10) {
                 enemySpawn = 0;
                 int randX = (int)(Math.random() * 550);
                 int randY = (int)(Math.random() * 550);
-                Enemy e1 = new Enemy("new enemy", 0, 0, randX, randY);
+                Enemy e1 = new Enemy("new enemy", 100, 0, randX, randY);
                 while(e1.colliding(player)) {
                     randX = (int)(Math.random() * 550);
                     randY = (int)(Math.random() * 550);
