@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
+
 public class Entity {
     private String name;
     private int Health;
@@ -11,6 +15,8 @@ public class Entity {
     private RectanglePanel healthBar;
     protected String imagePath;
     private ImagePanel image;
+    private ArrayList<JLabel> text = new ArrayList<JLabel>();
+    private ArrayList<Integer> textTimer = new ArrayList<Integer>();
 
     public Entity(String name, int Health, int Level, int PositionX, int PositionY, String imagePath) {
         this.name = name;
@@ -57,6 +63,14 @@ public class Entity {
         }
         this.healthBar.setWidth((int) ((this.Health / (double) this.maxHealth) * 50));
     }
+    public void damageText(int dmg) {
+        JLabel label = new JLabel("-" + dmg);
+        label.setForeground(Color.RED);
+        label.setBounds(PositionX + 15, PositionY - 20, 50, 20);
+        Javaswing.jframe.getContentPane().add(label);
+        text.add(label);
+        textTimer.add(0);
+    }
     public void setLevel(int Level) {
         this.Level = Level;
     }
@@ -94,11 +108,6 @@ public class Entity {
             this.PositionY = Javaswing.jframe.getHeight() - 50;
         }
     }
-    public void attack(Entity target) {
-        System.out.println(this.name + " attacks " + target.getName());
-        target.setHealth(target.getHealth() - 10);
-        System.out.println(target.getName() + " has " + target.getHealth() + " health left.");
-    }
     public RectanglePanel getRect() {
         return this.rect;
     }
@@ -113,6 +122,22 @@ public class Entity {
         Javaswing.jframe.getContentPane().add(this.rect);
         Javaswing.jframe.getContentPane().add(this.healthBorder);
         Javaswing.jframe.getContentPane().add(this.healthBar);
+        for(int x : textTimer) {
+            x++;
+        }
+        for(int i = 0; i < text.size(); i++) {
+            JLabel label = text.get(i);
+            label.setBounds(this.getX() + 15, this.getY() - 20 - i*10, 50, 10);
+            Javaswing.jframe.getContentPane().add(label);
+            if(textTimer.get(i) > 30) {
+                Javaswing.jframe.getContentPane().remove(label);
+                text.remove(i);
+                textTimer.remove(i);
+                i--;
+            } else {
+                textTimer.set(i, textTimer.get(i) + 1);
+            }
+        }
     }
     public boolean colliding(Entity e) {
         return (Math.abs(this.getX() - e.getX()) < 50) && (Math.abs(this.getY() - e.getY()) < 50);

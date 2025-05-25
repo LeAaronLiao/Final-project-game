@@ -37,7 +37,7 @@ public class Javaswing {
     public static int wsz = 600;
     public static void createAndShowGUI() {
         // Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
+        JFrame frame = new JFrame("FIGHT THE VIRS AND AARONS");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
@@ -53,5 +53,11 @@ public class Javaswing {
         Point mouse = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(mouse, jframe.getContentPane());
         return mouse;
+    }
+    public static void addLabel(String text, int x, int y) {
+        JLabel lbl = new JLabel(text);
+        lbl.setBounds(x, y, 200, 20);
+        jframe.getContentPane().add(lbl);
+        jframe.getContentPane().setComponentZOrder(lbl, jframe.getContentPane().getComponentCount() - 1);
     }
 }

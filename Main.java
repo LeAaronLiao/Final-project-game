@@ -26,7 +26,7 @@ public class Main {
     public static int yMove = 0;
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static int enemySpawn = 0;
-    public static QuestionPanel questionPanel = new QuestionPanel("whats 2+2", (new String[]{"3", "4", "2", "5"}), "5");
+    public static QuestionPanel questionPanel = new QuestionPanel(TestQuestions.giveQuestions());
     public static boolean playing = true;
     public static LinePanel line;
 
@@ -39,31 +39,26 @@ public class Main {
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
-
-            JLabel atkpl = new JLabel("attack power: " + player.getAttackPower());
-            atkpl.setBounds(0, 0, 200, 20);
-            frame.getContentPane().add(atkpl);
-            frame.getContentPane().setComponentZOrder(atkpl, frame.getContentPane().getComponentCount() - 1);
-
-            JLabel defpl = new JLabel("defense power: " + player.getDefensePower());
-            defpl.setBounds(0, 25, 200, 20);
-            frame.getContentPane().add(defpl);
-            frame.getContentPane().setComponentZOrder(defpl, frame.getContentPane().getComponentCount() - 1);
+            Javaswing.addLabel("attack power: " + player.getAttackPower(), 0, 0);
+            Javaswing.addLabel("defense power: " + player.getDefensePower(), 0, 20);
+            Javaswing.addLabel("score: " + player.getScore(), 0, 40);
 
             line = new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED);
             frame.getContentPane().add(line);
             for(int i = 0; i < enemies.size(); i++) {
                 Enemy x = enemies.get(i);
                 x.getRect().setColor(null);
-                x.move
-                if(bullet.colliding(x)) {
+                if(bullet.colliding(x) && shot) {
                     x.getRect().setColor(Color.BLUE);
-                    x.setHealth(x.getHealth()-10);
+                    x.setHealth(x.getHealth()-(10+player.getAttackPower()));
+                    x.damageText(10+player.getAttackPower());
                     if(x.getHealth() <= 0) {
                         enemies.remove(i);
+                        player.setScore(player.getScore() + 1);
                     }
                     shot = false;
                 }
+                x.move();
                 x.draw();
             }
             player.draw();
@@ -127,7 +122,7 @@ public class Main {
                 playing = true;
             } else {
                 playing = false;
-                questionPanel.newQuestion("whats 2 + 2", new String[]{"4","5","3","2"}, "5");
+                questionPanel.newQuestion(TestQuestions.giveQuestions());
             }
         }
     }
@@ -135,6 +130,7 @@ public class Main {
         shot = true;
         bulletLength = 50;
         bulletStart = line.getP1();
+        bulletFrames = 0;
         bulletEnd = new Point(Javaswing.getMousePos().x, Javaswing.getMousePos().y);
     }
 }
