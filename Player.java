@@ -1,16 +1,12 @@
 import java.awt.Color;
 import java.util.ArrayList;
 public class Player extends Entity {
-    private int attackPower;
-    private int defensePower;
     private String item;
     private int score;
     private int level;
 
-    public Player(String name, int Health, int Level, int PositionX, int PositionY, int attackPower, int defensePower, String item, ArrayList<Item> items) {
+    public Player(String name, int Health, int Level, int PositionX, int PositionY, String item, ArrayList<Item> items) {
         super(name, Health,Level, PositionX, PositionY, "shivank.jpg");
-        this.attackPower = attackPower;
-        this.defensePower = defensePower;
         this.item = item;
         this.score = 0;
         this.level = 1;
@@ -20,24 +16,6 @@ public class Player extends Entity {
     }
     public void setScore(int playerScore) {
         this.score = playerScore;
-    }
-    public int getAttackPower() {
-        return attackPower;
-    }
-    public void increaseAttackPower(){
-        attackPower++;
-    }
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-    public int getDefensePower() {
-        return defensePower;
-    }
-    public void setDefensePower(int defensePower) {
-        this.defensePower = defensePower;
-    }
-    public void increaseDefensePower(){
-        defensePower++;
     }
     public String getItem() {
         return item;

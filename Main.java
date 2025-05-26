@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Main {
-    public static Player player = new Player("plaer",0,0,0,0,0,0,"",new ArrayList<Item>());
+    public static Player player = new Player("plaer",100,0,0,10,"",new ArrayList<Item>());
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -25,7 +25,6 @@ public class Main {
     public static int xMove = 0;
     public static int yMove = 0;
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-    public static int enemySpawn = 0;
     public static QuestionPanel questionPanel = new QuestionPanel(TestQuestions.giveQuestions());
     public static boolean playing = true;
     public static LinePanel line;
@@ -42,7 +41,6 @@ public class Main {
             Javaswing.addLabel("attack power: " + player.getAttackPower(), 0, 0);
             Javaswing.addLabel("defense power: " + player.getDefensePower(), 0, 20);
             Javaswing.addLabel("score: " + player.getScore(), 0, 40);
-
             line = new LinePanel(player.getX()+25, player.getY()+25, Javaswing.getMousePos().x, Javaswing.getMousePos().y, 50, Color.RED);
             frame.getContentPane().add(line);
             for(int i = 0; i < enemies.size(); i++) {
@@ -50,19 +48,25 @@ public class Main {
                 x.getRect().setColor(null);
                 if(bullet.colliding(x) && shot) {
                     x.getRect().setColor(Color.BLUE);
-                    x.setHealth(x.getHealth()-(10+player.getAttackPower()));
-                    x.damageText(10+player.getAttackPower());
+                    x.takeDamage(10 + player.getAttackPower());
                     if(x.getHealth() <= 0) {
                         enemies.remove(i);
                         player.setScore(player.getScore() + 1);
                     }
                     shot = false;
                 }
+                if(x.hitSwords(player)) {
+                    player.takeDamage(x.getAttackPower() - player.getDefensePower());
+                    if(player.getHealth() <= 0) {
+                        playing = false;
+                        Javaswing.showMessage("You died! Answer questions to return to full health");
+                    }
+                }
                 x.move();
                 x.draw();
             }
             player.draw();
-            player.move(10*xMove, 10*yMove);
+            player.move(6*xMove, 6*yMove);
             if(!shot) {
                 bullet.setX(line.getP2().x-bullet.getRadius());
                 bullet.setY(line.getP2().y-bullet.getRadius());
@@ -81,9 +85,9 @@ public class Main {
                     bulletFrames = 0;
                 }
             }
-            enemySpawn++;
-            if(enemySpawn >= 40 && enemies.size() < 10) {
-                enemySpawn = 0;
+            Enemy.enemySpawn++;
+            if(Enemy.enemySpawn >= 40 && enemies.size() < 10) {
+                Enemy.enemySpawn = 0;
                 int randX = (int)(Math.random() * 550);
                 int randY = (int)(Math.random() * 550);
                 Enemy e1 = new Enemy("new enemy", 100, 0, randX, randY);
@@ -94,6 +98,13 @@ public class Main {
                     e1.setY(randY);
                 }
                 enemies.add(e1);
+            }
+            Enemy.enemyLevelup++;
+            if(Enemy.enemyLevelup >= 100) {
+                Enemy.enemyLevelup = 0;
+                for(int i = 0; i < enemies.size(); i++) {
+                    enemies.get(i).lvlUP();
+                }
             }
         } else {
             frame.getContentPane().setLayout(new BorderLayout());

@@ -60,4 +60,7 @@ public class Javaswing {
         jframe.getContentPane().add(lbl);
         jframe.getContentPane().setComponentZOrder(lbl, jframe.getContentPane().getComponentCount() - 1);
     }
+    public static void showMessage(String message) {
+        JOptionPane.showMessageDialog(jframe, message);
+    }
 }

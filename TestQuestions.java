@@ -34,7 +34,7 @@ public class TestQuestions {
         quizQuestions.add(new Questions("Which desert is the largest hot desert in the world?", new String[]{"Sahara Desert", "Gobi Desert", "Arabian Desert", "Kalahari Desert"}, "Sahara Desert"));
 
         // pop culture
-        quizQuestions.add(new Questions("Who sings the song 'Break Stuff'?", new String[]{"The Beatles", "Led Zeppelin", "Limp Bizkit", "Pink Floyd"}, "Queen"));
+        quizQuestions.add(new Questions("Who sings the song 'Break Stuff'?", new String[]{"The Beatles", "Led Zeppelin", "Limp Bizkit", "Pink Floyd"}, "Limp Bizkit"));
         quizQuestions.add(new Questions("What is the name of the main character in the 'Super Mario' video game series?", new String[]{"Luigi", "Wario", "Bowser", "Mario"}, "Mario"));
         quizQuestions.add(new Questions("Which movie features a character named 'Buzz Lightyear'?", new String[]{"Cars", "Finding Nemo", "Toy Story", "Monsters, Inc."}, "Toy Story"));
         quizQuestions.add(new Questions("What is the name of the friendly ghost in the popular cartoons?", new String[]{"Slimer", "Casper", "Ghosty", "Spooky"}, "Casper"));

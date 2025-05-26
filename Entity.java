@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-
 import javax.swing.JLabel;
 
 public class Entity {
@@ -10,6 +9,8 @@ public class Entity {
     private int Level;
     private int PositionX;
     private int PositionY;
+    private int attackPower = 0;
+    private int defensePower = 0;
     private RectanglePanel rect;
     private RectanglePanel healthBorder;
     private RectanglePanel healthBar;
@@ -26,8 +27,8 @@ public class Entity {
         this.PositionX = PositionX;
         this.PositionY = PositionY;
         this.rect = new RectanglePanel(getX(), getY(), 50, 50, new Color(0,0,0));
-        this.healthBorder = new RectanglePanel(getX(), getY()-5, 50, 5, new Color(0,0,0));
-        this.healthBar = new RectanglePanel(getX(), getY()-5, 50, 5, new Color(0,255,0), true);
+        this.healthBorder = new RectanglePanel(getX(), getY()-10, 50, 10, new Color(0,0,0));
+        this.healthBar = new RectanglePanel(getX(), getY()-10, 50, 10, new Color(0,255,0), true);
         this.imagePath = imagePath;
         this.image = new ImagePanel(PositionX, PositionY, 50, 50, imagePath);
     }
@@ -85,39 +86,45 @@ public class Entity {
     }
     public void setY(int PositionY) {
         this.PositionY = PositionY;
-        if(this.PositionY < 0) {
-            this.PositionY = 0;
+        if(this.PositionY < this.healthBar.getHeight()) {
+            this.PositionY = this.healthBar.getHeight();
         }
         if(this.PositionY > Javaswing.jframe.getHeight() - 50) {
             this.PositionY = Javaswing.jframe.getHeight() - 50;
         }
     }
     public void move(int x, int y) {
-        this.PositionX += x;
-        this.PositionY += y;
-        if(this.PositionX < 0) {
-            this.PositionX = 0;
-        }
-        if(this.PositionX > Javaswing.jframe.getWidth() - 50) {
-            this.PositionX = Javaswing.jframe.getWidth() - 50;
-        }
-        if(this.PositionY < 0) {
-            this.PositionY = 0;
-        }
-        if(this.PositionY > Javaswing.jframe.getHeight() - 50) {
-            this.PositionY = Javaswing.jframe.getHeight() - 50;
-        }
+        setX(this.PositionX + x);
+        setY(this.PositionY + y);
     }
     public RectanglePanel getRect() {
         return this.rect;
+    }
+    public int getAttackPower() {
+        return attackPower;
+    }
+    public void increaseAttackPower(){
+        attackPower++;
+    }
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+    public int getDefensePower() {
+        return defensePower;
+    }
+    public void setDefensePower(int defensePower) {
+        this.defensePower = defensePower;
+    }
+    public void increaseDefensePower(){
+        defensePower++;
     }
     public void draw() {
         this.rect.setX(PositionX);
         this.rect.setY(PositionY);
         this.healthBorder.setX(PositionX);
-        this.healthBorder.setY(PositionY-5);
+        this.healthBorder.setY(PositionY-this.healthBorder.getHeight());
         this.healthBar.setX(PositionX);
-        this.healthBar.setY(PositionY-5);
+        this.healthBar.setY(PositionY-this.healthBar.getHeight());
         this.image.draw(PositionX, PositionY, 50, 50);
         Javaswing.jframe.getContentPane().add(this.rect);
         Javaswing.jframe.getContentPane().add(this.healthBorder);
@@ -139,7 +146,11 @@ public class Entity {
             }
         }
     }
-    public boolean colliding(Entity e) {
-        return (Math.abs(this.getX() - e.getX()) < 50) && (Math.abs(this.getY() - e.getY()) < 50);
+    public boolean colliding(Entity other) {
+        return this.rect.colliding(other.getRect());
+    }
+    public void takeDamage(int dmg) {
+        this.setHealth(this.getHealth() - dmg);
+        this.damageText(dmg);
     }
 }

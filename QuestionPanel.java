@@ -80,13 +80,17 @@ public class QuestionPanel extends JPanel {
             timer.start();
         } else {
             x.setBackground(Color.RED);
-            x.add(new JLabel("Wrong! Try again!"));
+            Javaswing.showMessage("wrong! try again");
         }
         if(rightInARow % 3 == 0){
             Main.player.increaseAttackPower();
         }
         if(rightInARow % 5 == 0){
             Main.player.increaseDefensePower();
+        }
+        if(rightInARow == 10 && Main.player.getHealth() <= 0) {
+            Main.player.setHealth(100);
+            Javaswing.showMessage("You have been healed to full health! Hit 'q' to exit and keep playing.");
         }
     }
 }

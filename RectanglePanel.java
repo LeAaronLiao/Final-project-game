@@ -58,4 +58,9 @@ public class RectanglePanel extends JPanel {
             g.drawRect(0, 0, getWidth()-1, getHeight()-1); // x, y, width, height
         }
     }
+    public boolean colliding(RectanglePanel r) {
+        Rectangle thisRect = new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
+        Rectangle otherRect = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+        return thisRect.intersects(otherRect);
+    }
 }
