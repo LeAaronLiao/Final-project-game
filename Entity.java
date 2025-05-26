@@ -81,8 +81,8 @@ public class Entity {
         if(this.PositionX < 0) {
             this.PositionX = 0;
         }
-        if(this.PositionX > Javaswing.jframe.getWidth() - 50) {
-            this.PositionX = Javaswing.jframe.getWidth() - 50;
+        if(this.PositionX > Javaswing.jframe.getContentPane().getWidth() - 50) {
+            this.PositionX = Javaswing.jframe.getContentPane().getWidth() - 50;
         }
     }
     public void setY(int PositionY) {
@@ -90,8 +90,8 @@ public class Entity {
         if(this.PositionY < this.healthBar.getHeight()) {
             this.PositionY = this.healthBar.getHeight();
         }
-        if(this.PositionY > Javaswing.jframe.getHeight() - 50) {
-            this.PositionY = Javaswing.jframe.getHeight() - 50;
+        if(this.PositionY > Javaswing.jframe.getContentPane().getHeight() - 50) {
+            this.PositionY = Javaswing.jframe.getContentPane().getHeight() - 50;
         }
     }
     public void move(int x, int y) {

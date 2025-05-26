@@ -43,7 +43,10 @@ public class Javaswing {
 
         // Set the window size and display it.
         frame.getContentPane().setSize(wsz, wsz);
-        frame.setSize(wsz+50, wsz+50);
+        frame.pack();
+        Insets insets = frame.getInsets();
+        // Set the frame size to fit the content plus insets
+        frame.setSize(wsz + insets.left + insets.right, wsz + insets.top + insets.bottom);
         frame.setVisible(true);
         frame.addKeyListener(new KeyboardEvents());
         frame.addMouseListener(new MouseEvents());
