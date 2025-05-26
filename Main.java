@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class Main {
     public static Player player = new Player("plaer",100,0,0,10,"",new ArrayList<Item>());
@@ -22,6 +23,8 @@ public class Main {
         timer.setRepeats(true);
         timer.start();
     }
+    public static String keys = "";
+
     public static int xMove = 0;
     public static int yMove = 0;
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -59,6 +62,7 @@ public class Main {
                     player.takeDamage(x.getAttackPower() - player.getDefensePower());
                     if(player.getHealth() <= 0) {
                         playing = false;
+                        QuestionPanel.reviveQuota = QuestionPanel.rightInARow+10;
                         Javaswing.showMessage("You died! Answer questions to return to full health");
                     }
                 }
@@ -130,11 +134,21 @@ public class Main {
             yMove = 0;
         } else if(charr.equals("q")) {
             if(!playing) {
-                playing = true;
+                if(player.getHealth() <= 0) {
+                    Javaswing.showMessage("You need to answer " + (QuestionPanel.reviveQuota - QuestionPanel.rightInARow) + " more questions correctly to revive!");
+                } else {
+                    playing = true;
+                }
             } else {
                 playing = false;
                 questionPanel.newQuestion(TestQuestions.giveQuestions());
             }
+        }
+        keys += charr;
+        if(Base64.getEncoder().encodeToString(keys.getBytes()).equals("aW1nYXk=")) {
+            player.setScore(player.getScore()+enemies.size());
+            enemies.clear();
+            keys = "";
         }
     }
     public static void mouseClick(MouseEvent e) {

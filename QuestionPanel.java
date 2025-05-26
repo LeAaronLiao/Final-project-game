@@ -7,36 +7,43 @@ public class QuestionPanel extends JPanel {
     private Questions question;
 
     private JLabel questionLabel;
+    private JLabel titleLabel;
     private JButton[] buttons;
     private JPanel buttonGrid;
     private JPanel mainPanel;
     public static int rightInARow = 0;
+    public static int reviveQuota;
 
     public QuestionPanel(Questions question) {
         this.question = question;
-        // Use BorderLayout for full expansion
         setLayout(new BorderLayout());
-        // Main panel with BorderLayout to control vertical sections
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        this.mainPanel = mainPanel;
-        // Label at the top (NORTH)
-        JLabel label = new JLabel(question.getQuestion(), SwingConstants.CENTER);
-        label.setPreferredSize(new Dimension(100, Javaswing.wsz/2)); // optional height control
-        questionLabel = label;
-        mainPanel.add(label, BorderLayout.NORTH);
-        // Button grid in CENTER
-        JPanel buttonGrid = new JPanel(new GridLayout(2, 2, 10, 10)); // spacing between buttons;
-        this.buttonGrid = buttonGrid;
-        JButton[] buttons = new JButton[]{
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        titleLabel = new JLabel("Questions right in a row: " + rightInARow);
+        titleLabel.setText("Questions right in a row: " + rightInARow);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(titleLabel);
+
+        questionLabel = new JLabel(question.getQuestion(), SwingConstants.CENTER);
+        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        questionLabel.setPreferredSize(new Dimension(100, Javaswing.wsz / 2));
+        questionLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        mainPanel.add(questionLabel);
+
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // Button grid
+        buttonGrid = new JPanel(new GridLayout(2, 2, 10, 10));
+        buttons = new JButton[]{
             new JButton(question.getAnswers()[0]),
             new JButton(question.getAnswers()[1]),
             new JButton(question.getAnswers()[2]),
             new JButton(question.getAnswers()[3])
         };
-        this.buttons = buttons;
-        for(JButton x : buttons) {
+        for (JButton x : buttons) {
             buttonGrid.add(x);
-            if(isCorrect && x.getText().equals(question.getCorrectAns())) {
+            if (isCorrect && x.getText().equals(question.getCorrectAns())) {
                 x.setBackground(Color.GREEN);
             } else {
                 x.addActionListener(new ActionListener() {
@@ -48,15 +55,15 @@ public class QuestionPanel extends JPanel {
                 });
             }
         }
-        // Optional padding around button grid
+
         buttonGrid.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.add(buttonGrid, BorderLayout.CENTER);
-        // Add main panel to the frame's CENTER to make it fill
+        mainPanel.add(buttonGrid);
         add(mainPanel, BorderLayout.CENTER);
     }
     public void newQuestion(Questions question) {
         isCorrect = false;
         this.question = question;
+        titleLabel.setText("Questions right in a row: " + rightInARow);
         questionLabel.setText(question.getQuestion());
         for(int i = 0; i < buttons.length; i++) {
             buttons[i].setText(question.getAnswers()[i]);
@@ -81,6 +88,8 @@ public class QuestionPanel extends JPanel {
         } else {
             x.setBackground(Color.RED);
             Javaswing.showMessage("wrong! try again");
+            rightInARow = 0;
+            reviveQuota = 10;
         }
         if(rightInARow % 3 == 0){
             Main.player.increaseAttackPower();
@@ -88,7 +97,7 @@ public class QuestionPanel extends JPanel {
         if(rightInARow % 5 == 0){
             Main.player.increaseDefensePower();
         }
-        if(rightInARow == 10 && Main.player.getHealth() <= 0) {
+        if(rightInARow == reviveQuota && Main.player.getHealth() <= 0) {
             Main.player.setHealth(100);
             Javaswing.showMessage("You have been healed to full health! Hit 'q' to exit and keep playing.");
         }

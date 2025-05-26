@@ -28,7 +28,8 @@ public class Entity {
         this.PositionY = PositionY;
         this.rect = new RectanglePanel(getX(), getY(), 50, 50, new Color(0,0,0));
         this.healthBorder = new RectanglePanel(getX(), getY()-10, 50, 10, new Color(0,0,0));
-        this.healthBar = new RectanglePanel(getX(), getY()-10, 50, 10, new Color(0,255,0), true);
+        this.healthBorder.setOpaque(true);
+        this.healthBar = new RectanglePanel(getX()+1, getY()-10+1, 48, 9, new Color(0,255,0), true); // 1-2 px less to fit inside border
         this.imagePath = imagePath;
         this.image = new ImagePanel(PositionX, PositionY, 50, 50, imagePath);
     }
@@ -123,12 +124,12 @@ public class Entity {
         this.rect.setY(PositionY);
         this.healthBorder.setX(PositionX);
         this.healthBorder.setY(PositionY-this.healthBorder.getHeight());
-        this.healthBar.setX(PositionX);
-        this.healthBar.setY(PositionY-this.healthBar.getHeight());
+        this.healthBar.setX(PositionX+1);
+        this.healthBar.setY(PositionY-this.healthBar.getHeight()+1);
         this.image.draw(PositionX, PositionY, 50, 50);
         Javaswing.jframe.getContentPane().add(this.rect);
-        Javaswing.jframe.getContentPane().add(this.healthBorder);
         Javaswing.jframe.getContentPane().add(this.healthBar);
+        Javaswing.jframe.getContentPane().add(this.healthBorder);
         for(int x : textTimer) {
             x++;
         }
