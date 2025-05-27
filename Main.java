@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class Main {
-    public static Player player = new Player("plaer",100,0,0,10,"",new ArrayList<Item>());
+    public static Player player = new Player("plaer",100,0,0,10,"");
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -128,7 +128,7 @@ public class Main {
             }
         }
         keys += charr;
-        if(Base64.getEncoder().encodeToString(keys.substring(keys.length()-5).getBytes()).equals("aW1nYXk=")) {
+        if(keys.length() >= 5 && Base64.getEncoder().encodeToString(keys.substring(keys.length()-5).getBytes()).equals("aW1nYXk=")) {
             player.setScore(player.getScore()+enemies.size());
             enemies.clear();
             keys = "";

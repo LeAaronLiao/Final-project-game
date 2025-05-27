@@ -12,7 +12,7 @@ public class Enemy extends Entity {
     private RectanglePanel ySword;
     private int swordSpawn = 0;
     public Enemy(String name, int Health, int Level, int PositionX, int PositionY) {
-        super(name, Health, Level, PositionX, PositionY,(new String[]{"aaron.jpg", "vir.jpg"})[(int)(Math.random() * 2)]);
+        super(name, Health, Level, PositionX, PositionY,(new String[]{"aaron.jpg", "vir.jpg", "atharva.png"})[(int)(Math.random() * 3)]);
         setAttackPower(2);
         xSword = new RectanglePanel(0, 0, 0, 0, Color.RED, true);
         ySword = new RectanglePanel(0, 0, 0, 0, Color.RED, true);

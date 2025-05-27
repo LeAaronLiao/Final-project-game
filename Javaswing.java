@@ -40,6 +40,7 @@ public class Javaswing {
         JFrame frame = new JFrame("FIGHT THE VIRS AND AARONS");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.BLACK);
 
         // Set the window size and display it.
         frame.getContentPane().setSize(wsz, wsz);
@@ -60,6 +61,7 @@ public class Javaswing {
     public static void addLabel(String text, int x, int y) {
         JLabel lbl = new JLabel(text);
         lbl.setBounds(x, y, 200, 20);
+        lbl.setForeground(Color.WHITE);
         jframe.getContentPane().add(lbl);
         jframe.getContentPane().setComponentZOrder(lbl, jframe.getContentPane().getComponentCount() - 1);
     }
