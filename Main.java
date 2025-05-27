@@ -32,12 +32,12 @@ public class Main {
     public static boolean playing = true;
     public static LinePanel line;
 
-    public static CirclePanel bullet = new CirclePanel(0, 0, 5, Color.RED);
-    public static int bulletLength = 1;
-    public static Point bulletStart;
-    public static Point bulletEnd;
-    public static boolean shot = false;
-    public static int bulletFrames = 0;
+    // public static CirclePanel bullet = new CirclePanel(0, 0, 5, Color.RED);
+    // public static int bulletLength = 1;
+    // public static Point bulletStart;
+    // public static Point bulletEnd;
+    // public static boolean shot = false;
+    // public static int bulletFrames = 0;
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
@@ -49,14 +49,15 @@ public class Main {
             for(int i = 0; i < enemies.size(); i++) {
                 Enemy x = enemies.get(i);
                 x.getRect().setColor(null);
-                if(bullet.colliding(x) && shot) {
+                int bulletIndex = player.checkBullets(x);
+                if(bulletIndex >= 0) {
                     x.getRect().setColor(Color.BLUE);
                     x.takeDamage(10 + player.getAttackPower());
                     if(x.getHealth() <= 0) {
                         enemies.remove(i);
                         player.setScore(player.getScore() + 1);
                     }
-                    shot = false;
+                    player.removeBullet(bulletIndex);
                 }
                 if(x.hitSwords(player)) {
                     player.takeDamage(x.getAttackPower() - player.getDefensePower());
@@ -71,24 +72,6 @@ public class Main {
             }
             player.draw();
             player.move(6*xMove, 6*yMove);
-            if(!shot) {
-                bullet.setX(line.getP2().x-bullet.getRadius());
-                bullet.setY(line.getP2().y-bullet.getRadius());
-            } else {
-                bullet.setX(
-                    new LinePanel(bulletStart.x, bulletStart.y, bulletEnd.x, bulletEnd.y, bulletLength, null).getP2().x-bullet.getRadius()
-                );
-                bullet.setY(
-                    new LinePanel(bulletStart.x, bulletStart.y, bulletEnd.x, bulletEnd.y, bulletLength, null).getP2().y-bullet.getRadius()
-                );
-                frame.getContentPane().add(bullet);
-                bulletLength+=10;
-                bulletFrames++;
-                if(bulletFrames > 25) {
-                    shot = false;
-                    bulletFrames = 0;
-                }
-            }
             Enemy.enemySpawn++;
             if(Enemy.enemySpawn >= 40 && enemies.size() < 10) {
                 Enemy.enemySpawn = 0;
@@ -152,10 +135,11 @@ public class Main {
         }
     }
     public static void mouseClick(MouseEvent e) {
-        shot = true;
-        bulletLength = 50;
-        bulletStart = line.getP1();
-        bulletFrames = 0;
-        bulletEnd = new Point(Javaswing.getMousePos().x, Javaswing.getMousePos().y);
+        // shot = true;
+        // bulletLength = 50;
+        // bulletStart = line.getP1();
+        // bulletFrames = 0;
+        // bulletEnd = new Point(Javaswing.getMousePos().x, Javaswing.getMousePos().y);
+        player.addBullet();
     }
 }
