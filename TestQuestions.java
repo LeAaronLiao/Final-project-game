@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TestQuestions {
     private static ArrayList<Questions> quizQuestions;
@@ -39,8 +40,17 @@ public class TestQuestions {
         quizQuestions.add(new Questions("Which movie features a character named 'Buzz Lightyear'?", new String[]{"Cars", "Finding Nemo", "Toy Story", "Monsters, Inc."}, "Toy Story"));
         quizQuestions.add(new Questions("What is the name of the friendly ghost in the popular cartoons?", new String[]{"Slimer", "Casper", "Ghosty", "Spooky"}, "Casper"));
         quizQuestions.add(new Questions("Which band had hits like 'B.Y.O.B' and 'Toxicity'?", new String[]{"Pearl Jam", "System of a Down", "Nirvana", "Alice in Chains"}, "System of a Down"));
+        
         int random = (int)(Math.random() * quizQuestions.size());
         Questions rand = quizQuestions.get(random);
+
+        for (int i = 3; i > 0; i--) {
+            int index = (int)(Math.random() * (i + 1));
+            // Swap array[i] and array[index]
+            String temp = rand.getAnswers()[i];
+            rand.getAnswers()[i] = rand.getAnswers()[index];
+            rand.getAnswers()[index] = temp;
+        }
         return rand;
     }
 }

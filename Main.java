@@ -128,18 +128,13 @@ public class Main {
             }
         }
         keys += charr;
-        if(Base64.getEncoder().encodeToString(keys.getBytes()).equals("aW1nYXk=")) {
+        if(Base64.getEncoder().encodeToString(keys.substring(keys.length()-5).getBytes()).equals("aW1nYXk=")) {
             player.setScore(player.getScore()+enemies.size());
             enemies.clear();
             keys = "";
         }
     }
     public static void mouseClick(MouseEvent e) {
-        // shot = true;
-        // bulletLength = 50;
-        // bulletStart = line.getP1();
-        // bulletFrames = 0;
-        // bulletEnd = new Point(Javaswing.getMousePos().x, Javaswing.getMousePos().y);
         player.addBullet();
     }
 }
