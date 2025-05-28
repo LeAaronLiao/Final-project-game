@@ -32,12 +32,7 @@ public class Main {
     public static boolean playing = true;
     public static LinePanel line;
 
-    // public static CirclePanel bullet = new CirclePanel(0, 0, 5, Color.RED);
-    // public static int bulletLength = 1;
-    // public static Point bulletStart;
-    // public static Point bulletEnd;
-    // public static boolean shot = false;
-    // public static int bulletFrames = 0;
+    public static Item item;
     public static void mainThread(JFrame frame) {
         if(playing) {
             frame.getContentPane().setLayout(null);
@@ -91,6 +86,29 @@ public class Main {
                 Enemy.enemyLevelup = 0;
                 for(int i = 0; i < enemies.size(); i++) {
                     enemies.get(i).lvlUP();
+                }
+            }
+            if(item != null) {
+                item.draw();
+                if(item.getRect().colliding(player.getRect())) {
+                    item.use(player);
+                    item = null;
+                }
+            } else {
+                int spawn = (int)(Math.random() * 0);
+                System.out.println(spawn);
+                if(spawn == 0) {
+                    int itemX = (int)(Math.random() * 550);
+                    int itemY = (int)(Math.random() * 550);
+                    item = Item.getRandItem();
+                    item.setX(itemX);
+                    item.setY(itemY);
+                    while(item.getRect().colliding(player.getRect())) {
+                        itemX = (int)(Math.random() * 550);
+                        itemY = (int)(Math.random() * 550);
+                        item.setX(itemX);
+                        item.setY(itemY);
+                    }
                 }
             }
         } else {
