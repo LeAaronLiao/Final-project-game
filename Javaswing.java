@@ -37,7 +37,7 @@ public class Javaswing {
     public static int wsz = 600;
     public static void createAndShowGUI() {
         // Create and set up the window.
-        JFrame frame = new JFrame("FIGHT THE VIRS AND AARONS");
+        JFrame frame = new JFrame("Monsterfighter 2000");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.BLACK);

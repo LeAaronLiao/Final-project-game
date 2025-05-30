@@ -60,7 +60,11 @@ public class QuestionPanel extends JPanel {
         mainPanel.add(buttonGrid);
         add(mainPanel, BorderLayout.CENTER);
     }
-    public void newQuestion(Questions question) {
+    public void newQuestion() {
+        Questions question = TestQuestions.giveQuestions();
+        while(question.equals(this.question)) {
+            question = TestQuestions.giveQuestions();
+        }
         isCorrect = false;
         this.question = question;
         titleLabel.setText("Questions right in a row: " + rightInARow);
@@ -80,7 +84,7 @@ public class QuestionPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String q = questionLabel.getText();
-                    newQuestion(TestQuestions.giveQuestions());
+                    newQuestion();
                 }
             });
             timer.setRepeats(false);

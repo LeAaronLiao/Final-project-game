@@ -96,7 +96,6 @@ public class Main {
                 }
             } else {
                 int spawn = (int)(Math.random() * 0);
-                System.out.println(spawn);
                 if(spawn == 0) {
                     int itemX = (int)(Math.random() * 550);
                     int itemY = (int)(Math.random() * 550);
@@ -142,7 +141,7 @@ public class Main {
                 }
             } else {
                 playing = false;
-                questionPanel.newQuestion(TestQuestions.giveQuestions());
+                questionPanel.newQuestion();
             }
         }
         keys += charr;
